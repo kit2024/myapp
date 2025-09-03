@@ -31,8 +31,8 @@ class MinistryCard extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           ColorFiltered(
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.4),
+            colorFilter: const ColorFilter.mode(
+              Color(0x66000000), // More efficient than withOpacity
               BlendMode.darken,
             ),
             child: Image.network(
