@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:myapp/home_page.dart';
+import 'package:myapp/router.dart';
 import 'package:myapp/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
@@ -20,12 +21,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Church App',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeProvider.themeMode,
-          home: const HomePage(),
+          routerConfig: router,
         );
       },
     );

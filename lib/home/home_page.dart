@@ -1,43 +1,28 @@
-
 import 'package:flutter/material.dart';
-import 'package:myapp/bottom_nav/contact_page.dart';
-import 'package:myapp/bottom_nav/events_page.dart';
-import 'package:myapp/bottom_nav/home_widget.dart';
-import 'package:myapp/bottom_nav/media_page.dart';
+import 'package:go_router/go_router.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({
+    super.key,
+    required this.navigationShell,
+  });
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+  final StatefulNavigationShell navigationShell;
 
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  void _onTap(int index) {
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
   }
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeWidget(),
-    EventsPage(),
-    MediaPage(),
-    ContactPage(),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _widgetOptions,
-      ),
+      body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: navigationShell.currentIndex,
+        onTap: _onTap,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey,

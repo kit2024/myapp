@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myapp/ministry_card.dart';
 
 class HomeWidget extends StatelessWidget {
@@ -11,22 +12,27 @@ class HomeWidget extends StatelessWidget {
       {
         'title': 'WHC',
         'imageUrl': 'https://picsum.photos/seed/whc/400/200',
+        'path': '/whc',
       },
       {
         'title': 'Ministry',
         'imageUrl': 'https://picsum.photos/seed/ministry/400/200',
+        'path': '/ministry',
       },
       {
         'title': 'WHI',
         'imageUrl': 'https://picsum.photos/seed/whi/400/200',
+        'path': '/whi',
       },
       {
         'title': 'World Mission',
         'imageUrl': 'https://picsum.photos/seed/mission/400/200',
+        'path': '/world_mission',
       },
       {
         'title': 'GHP',
         'imageUrl': 'https://picsum.photos/seed/ghp/400/200',
+        'path': '/ghp',
       },
     ];
 
@@ -55,11 +61,14 @@ class HomeWidget extends StatelessWidget {
             final card = ministryCards[index];
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: SizedBox(
-                height: 150,
-                child: MinistryCard(
-                  title: card['title']!,
-                  imageUrl: card['imageUrl'] as String?,
+              child: GestureDetector(
+                onTap: () => context.go(card['path']!),
+                child: SizedBox(
+                  height: 150,
+                  child: MinistryCard(
+                    title: card['title']!,
+                    imageUrl: card['imageUrl'] as String?,
+                  ),
                 ),
               ),
             );

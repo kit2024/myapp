@@ -21,10 +21,7 @@ class MinistryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
       ),
       clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () {},
-        child: buildCardContent(context),
-      ),
+      child: buildCardContent(context),
     );
   }
 
@@ -33,12 +30,15 @@ class MinistryCard extends StatelessWidget {
       return Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Image.network(
-            imageUrl!,
-            fit: BoxFit.cover,
-            // ignore: deprecated_member_use
-            color: Colors.black.withOpacity(0.4),
-            colorBlendMode: BlendMode.darken,
+          ColorFiltered(
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.4),
+              BlendMode.darken,
+            ),
+            child: Image.network(
+              imageUrl!,
+              fit: BoxFit.cover,
+            ),
           ),
           Center(
             child: Text(
